@@ -3,30 +3,26 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+	android:layout_margin="20dp"
     >
-
 	<LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
-       	<Button
-			android:text="连接"
-			android:id="@+id/Button03"
-			android:layout_width="match_parent"
+			android:layout_width="fill_parent"
 			android:layout_height="wrap_content"
-			android:layout_weight="1"
-			android:onClick="onConnectButtonClicked">
-		</Button>
-		<Button
-			android:text="退出"
-			android:id="@+id/Button06"
+			android:orientation="vertical">
+		<TextView
+			android:text="欢迎使用"
+			android:textSize="30dp"
+			android:gravity="center"
 			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:layout_weight="1"
-			android:onClick="onQuitButtonClicked">
-		</Button>
-    </LinearLayout>
+			android:layout_height="50dp"/>
+		<TextView
+			android:text="ZLX—150C智能蔬菜种子重力选种机"
+			android:textSize="20dp"
+			android:gravity="center_horizontal"
+			android:layout_width="fill_parent"
+			android:layout_height="40dp"/>
+	</LinearLayout>
+
 	<LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -40,7 +36,7 @@
 		    android:layout_height="wrap_content"
 		    android:layout_weight="1"
 		    />
-		<EditText 
+		<EditText
 		    android:id="@+id/ShaichuangpinlvEdit"
 		    android:layout_width="0dp"
 		    android:layout_height="wrap_content"
@@ -131,17 +127,64 @@
 				<LinearLayout
 						android:id="@+id/横向倾角"
 						android:layout_width="match_parent"
-						android:layout_height="match_parent"
+						android:layout_height="wrap_content"
 						android:orientation="vertical">
+					<Button
+							android:id="@+id/横向倾角加"
+							android:layout_width="match_parent"
+							android:layout_height="fill_parent"
+							android:layout_weight="1"/>
+					<Button
+							android:id="@+id/横向倾角减"
+							android:layout_width="match_parent"
+							android:layout_height="fill_parent"
+							android:layout_weight="1"/>
 				</LinearLayout>
 				<LinearLayout
 						android:id="@+id/纵向倾角"
 						android:layout_width="match_parent"
 						android:layout_height="match_parent"
 						android:orientation="vertical">
+					<Button
+							android:id="@+id/纵向倾角加"
+							android:layout_width="match_parent"
+							android:layout_height="fill_parent"
+							android:layout_weight="1"/>
+					<Button
+							android:id="@+id/纵向倾角减"
+							android:layout_width="match_parent"
+							android:layout_height="fill_parent"
+							android:layout_weight="1"/>
 				</LinearLayout>
 			</FrameLayout>
 		</LinearLayout>
 	</TabHost>
+	<LinearLayout
+			android:layout_width="fill_parent"
+			android:layout_height="match_parent"
+			android:layout_weight="1">
+	</LinearLayout>
+	<LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+       	<Button
+			android:text="连接"
+			android:id="@+id/Button03"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:onClick="onConnectButtonClicked">
+		</Button>
+		<Button
+			android:text="退出"
+			android:id="@+id/Button06"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:onClick="onQuitButtonClicked">
+		</Button>
+    </LinearLayout>
 
 </LinearLayout>
