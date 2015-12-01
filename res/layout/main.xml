@@ -24,14 +24,40 @@
 	</LinearLayout>
 
 	<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingTop="5dp"
+    android:paddingBottom="5dp"
+    >
+    <TextView
+        android:text="风机频率(Hz)"
+        android:textSize="28dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        />
+    <TextView
+        android:id="@+id/WindFreq"
+        android:layout_width="0dp"
+        android:textSize="28dp"
+        android:inputType="number"
+        android:gravity="center"
+        android:background="@drawable/shape"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        />
+</LinearLayout>
+	<LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-		android:padding="5dp"
+		android:paddingBottom="5dp"
+		android:paddingTop="5dp"
         >
 		<TextView
 		    android:text="筛床频率(Hz)"
-		    android:textSize="25dp"
+		    android:textSize="28dp"
 		    android:layout_width="0dp"
 		    android:layout_height="wrap_content"
 		    android:layout_weight="1"
@@ -39,31 +65,8 @@
 		<TextView
 		    android:id="@+id/ShakeFreq"
 		    android:layout_width="0dp"
-			android:textSize="25dp"
-			android:gravity="center"
-			android:background="@drawable/shape"
-		    android:layout_height="wrap_content"
-		    android:layout_weight="1"
-		    />
-    </LinearLayout>
-    
-        <LinearLayout 
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-		android:padding="5dp"
-        >
-		<TextView
-		    android:text="风机频率(Hz)"
-		    android:textSize="25dp"
-		    android:layout_width="0dp"
-		    android:layout_height="wrap_content"
-		    android:layout_weight="1"
-		    />
-		<TextView
-		    android:id="@+id/WindFreq"
-		    android:layout_width="0dp"
-			android:textSize="25dp"
+			android:textSize="28dp"
+			android:inputType="number"
 			android:gravity="center"
 			android:background="@drawable/shape"
 		    android:layout_height="wrap_content"
@@ -75,7 +78,6 @@
 	<TabHost
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:padding="5dp"
 			android:id="@+id/tabHost">
 		<LinearLayout
 				android:layout_width="match_parent"
@@ -93,18 +95,20 @@
 				<LinearLayout
 						android:id="@+id/TabLayout_Shake"
 						android:layout_width="match_parent"
-						android:layout_height="match_parent"
+						android:layout_height="wrap_content"
 						android:orientation="horizontal"
 						android:paddingTop="10dp">
 					<Button
-							android:text="+"
+							android:text="加"
+							android:textSize="20dp"
 							android:id="@+id/ShakeFreqInc"
 							android:layout_width="fill_parent"
 							android:layout_weight="1"
 							android:layout_height="fill_parent"
 							android:onClick="onShakeFreqIncClicked"/>
 					<Button
-							android:text="-"
+							android:text="减"
+							android:textSize="20dp"
 							android:id="@+id/ShakeFreqDec"
 							android:layout_width="fill_parent"
 							android:layout_weight="1"
@@ -119,14 +123,16 @@
 						android:orientation="horizontal"
 						android:paddingTop="10dp">
 					<Button
-							android:text="+"
+							android:text="加"
+							android:textSize="20dp"
 							android:layout_width="match_parent"
 							android:layout_weight="1"
 							android:layout_height="fill_parent"
 							android:id="@+id/WindFreqInc"
 							android:onClick="onWindFreqIncClicked"/>
 					<Button
-							android:text="-"
+							android:text="减"
+							android:textSize="20dp"
 							android:layout_width="match_parent"
 							android:layout_weight="1"
 							android:layout_height="fill_parent"
@@ -142,14 +148,16 @@
 						android:paddingTop="10dp">
 					<Button
 							android:id="@+id/Angle_HorizontalInc"
-							android:text="+"
+							android:text="加"
+							android:textSize="20dp"
 							android:layout_width="match_parent"
 							android:layout_height="fill_parent"
 							android:layout_weight="1"
 							android:onClick="onHoriAngleIncClicked"/>
 					<Button
 							android:id="@+id/Angle_HorizontalDec"
-							android:text="-"
+							android:text="减"
+							android:textSize="20dp"
 							android:layout_width="match_parent"
 							android:layout_height="fill_parent"
 							android:layout_weight="1"
@@ -163,14 +171,16 @@
 						android:paddingTop="10dp">
 					<Button
 							android:id="@+id/Angle_VerticalInc"
-							android:text="+"
+							android:text="加"
+							android:textSize="20dp"
 							android:layout_width="match_parent"
 							android:layout_height="fill_parent"
 							android:onClick="onVerticalAngleIncClicked"
 							android:layout_weight="1"/>
 					<Button
 							android:id="@+id/Angle_VerticalDec"
-							android:text="-"
+							android:text="减"
+							android:textSize="20dp"
 							android:layout_width="match_parent"
 							android:layout_height="fill_parent"
 							android:onClick="onVerticalAngleDecClicked"
@@ -191,6 +201,7 @@
         >
        	<Button
 			android:text="连接"
+			android:textSize="20dp"
 			android:id="@+id/Connect_Button"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
@@ -199,6 +210,7 @@
 		</Button>
 		<Button
 			android:text="退出"
+			android:textSize="20dp"
 			android:id="@+id/Quit_Button"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
