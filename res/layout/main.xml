@@ -33,15 +33,15 @@
         <TextView
                 android:text="风机频率(Hz)"
                 android:textSize="28sp"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
         />
         <TextView
                 android:id="@+id/WindFreq"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:textSize="28sp"
-                android:inputType="number"
+                android:layout_marginLeft="20dp"
                 android:gravity="center"
                 android:text="0"
                 android:background="@drawable/shape"
@@ -59,15 +59,15 @@
         <TextView
                 android:text="筛床频率(Hz)"
                 android:textSize="28sp"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
         />
         <TextView
                 android:id="@+id/ShakeFreq"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
+                android:layout_marginLeft="20dp"
                 android:textSize="28sp"
-                android:inputType="number"
                 android:text="0"
                 android:gravity="center"
                 android:background="@drawable/shape"
@@ -94,7 +94,6 @@
                     android:id="@android:id/tabcontent"
                     android:layout_width="match_parent"
                     android:layout_height="70dp">
-
                 <LinearLayout
                         android:id="@+id/TabLayout_Wind"
                         android:layout_width="match_parent"
@@ -103,17 +102,19 @@
                         android:paddingTop="10dp">
                     <Button
                             android:text="加"
-                            android:textSize="30sp"
+                            android:textSize="27sp"
                             android:layout_width="match_parent"
                             android:layout_weight="1"
+                            android:background="@drawable/custombutton"
                             android:layout_height="match_parent"
                             android:id="@+id/WindFreqInc"
                             android:onClick="onFreqClicked"/>
                     <Button
                             android:text="减"
-                            android:textSize="30sp"
+                            android:textSize="27sp"
                             android:layout_width="match_parent"
                             android:layout_weight="1"
+                            android:background="@drawable/custombutton"
                             android:layout_height="match_parent"
                             android:id="@+id/WindFreqDec"
                             android:onClick="onFreqClicked"/>
@@ -127,18 +128,20 @@
                         android:paddingTop="10dp">
                     <Button
                             android:text="加"
-                            android:textSize="30sp"
+                            android:textSize="27sp"
                             android:id="@+id/ShakeFreqInc"
                             android:layout_width="match_parent"
                             android:layout_weight="1"
+                            android:background="@drawable/custombutton"
                             android:layout_height="match_parent"
                             android:onClick="onFreqClicked"/>
                     <Button
                             android:text="减"
-                            android:textSize="30sp"
+                            android:textSize="27sp"
                             android:id="@+id/ShakeFreqDec"
                             android:layout_width="match_parent"
                             android:layout_weight="1"
+                            android:background="@drawable/custombutton"
                             android:layout_height="match_parent"
                             android:onClick="onFreqClicked"/>
 
@@ -153,28 +156,37 @@
                             android:orientation="horizontal"
                             android:id="@+id/AngleHorizontalRadio"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:layout_height="match_parent">
                         <RadioButton
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
-                                android:textSize="30sp"
-                                android:text="正转"
+                                android:textSize="27sp"
+                                android:button="@null"
+                                android:gravity="center"
+                                android:background="@drawable/custombutton"
+                                android:text="加"
                                 android:id="@+id/Angle_HorizontalInc"/>
                         <RadioButton
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
-                                android:textSize="30sp"
+                                android:gravity="center"
+                                android:textSize="27sp"
+                                android:background="@drawable/custombutton"
                                 android:checked="true"
-                                android:text="停止"
+                                android:button="@null"
+                                android:text="停"
                                 android:id="@+id/Angle_HorizontalStop"/>
                         <RadioButton
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
-                                android:textSize="30sp"
-                                android:text="反转"
+                                android:gravity="center"
+                                android:background="@drawable/custombutton"
+                                android:button="@null"
+                                android:textSize="27sp"
+                                android:text="减"
                                 android:id="@+id/Angle_HorizontalDec"/>
                     </RadioGroup>
 
@@ -189,28 +201,37 @@
                             android:orientation="horizontal"
                             android:id="@+id/AngleVerticalRadio"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:layout_height="match_parent">
                         <RadioButton
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
-                                android:textSize="30sp"
-                                android:text="正转"
+                                android:gravity="center"
+                                android:button="@null"
+                                android:background="@drawable/custombutton"
+                                android:textSize="27sp"
+                                android:text="加"
                                 android:id="@+id/Angle_VerticalInc"/>
                         <RadioButton
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
+                                android:gravity="center"
+                                android:button="@null"
+                                android:background="@drawable/custombutton"
                                 android:checked="true"
-                                android:textSize="30sp"
-                                android:text="停止"
+                                android:textSize="27sp"
+                                android:text="停"
                                 android:id="@+id/Angle_VerticalStop"/>
                         <RadioButton
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
-                                android:textSize="30sp"
-                                android:text="反转"
+                                android:button="@null"
+                                android:gravity="center"
+                                android:background="@drawable/custombutton"
+                                android:textSize="27sp"
+                                android:text="减"
                                 android:id="@+id/Angle_VerticalDec"/>
                     </RadioGroup>
                 </LinearLayout>
@@ -236,6 +257,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="@drawable/custombutton"
                 android:onClick="onConnectButtonClicked">
         </Button>
         <Button
@@ -245,6 +267,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="@drawable/custombutton"
                 android:onClick="onQuitButtonClicked">
         </Button>
     </LinearLayout>

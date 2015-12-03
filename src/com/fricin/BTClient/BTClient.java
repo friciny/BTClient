@@ -70,6 +70,7 @@ public class BTClient extends Activity {
         tabHost.addTab(tabHost.newTabSpec("Shake").setIndicator("筛床频率").setContent(R.id.TabLayout_Shake));
         tabHost.addTab(tabHost.newTabSpec("Angle_H").setIndicator("横向倾角").setContent(R.id.TabLayout_AngleHorizontal));
         tabHost.addTab(tabHost.newTabSpec("Angle_V").setIndicator("纵向倾角").setContent(R.id.TabLayout_AngleVertical));
+        Log.d("gg",tabHost.getTabWidget()+"");
         //ShakeFreqInc =  (Button)findViewById(R.id.ShakeFreqInc);
 
         //如果打开本地蓝牙设备不成功，提示信息，结束程序
@@ -327,11 +328,9 @@ public class BTClient extends Activity {
                         break;
                 }
                 byte[] buff = {0x05, 0x04, id, cmd};
-
                 try {
                     os = _socket.getOutputStream();
                     os.write(buff);
-
                 } catch (IOException e) {
                 }
             }
