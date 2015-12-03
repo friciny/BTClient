@@ -1,5 +1,6 @@
 package com.fricin.BTClient;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -22,6 +23,7 @@ import android.widget.RadioGroup.*;
 //import android.view.MenuItem;
 import android.view.View;
 import com.test.BTClient.R;
+import org.apache.http.util.ByteArrayBuffer;
 
 public class BTClient extends Activity {
 
@@ -31,10 +33,8 @@ public class BTClient extends Activity {
 
     private InputStream is;    //输入流，用来接收蓝牙数据
     private OutputStream os;
-    static private String Smsg = "";    //Shake Freq Message
-    static private String Wmsg = "";    //wind Freq Message
-    static private TextView ShakeFreq;
-    static private TextView WindFreq;
+    private TextView ShakeFreq;
+    private TextView WindFreq;
     private RadioGroup AngleHradioGroup;
     private RadioGroup AngleVradioGroup;
 
@@ -68,9 +68,10 @@ public class BTClient extends Activity {
         tabHost.setup();
         tabHost.addTab(tabHost.newTabSpec("Wind").setIndicator("风机频率").setContent(R.id.TabLayout_Wind));
         tabHost.addTab(tabHost.newTabSpec("Shake").setIndicator("筛床频率").setContent(R.id.TabLayout_Shake));
+        tabHost = (TabHost)findViewById(R.id.tabHost2);
+        tabHost.setup();
         tabHost.addTab(tabHost.newTabSpec("Angle_H").setIndicator("横向倾角").setContent(R.id.TabLayout_AngleHorizontal));
         tabHost.addTab(tabHost.newTabSpec("Angle_V").setIndicator("纵向倾角").setContent(R.id.TabLayout_AngleVertical));
-        Log.d("gg",tabHost.getTabWidget()+"");
         //ShakeFreqInc =  (Button)findViewById(R.id.ShakeFreqInc);
 
         //如果打开本地蓝牙设备不成功，提示信息，结束程序
@@ -165,18 +166,18 @@ public class BTClient extends Activity {
                         }
                     }
                     int size;
+                    Message msg = handler.obtainMessage();
                     try {
                         byte[] buffer = new byte[count];
                         if (is == null) return;
                         size = is.read(buffer);
                         if (size > 0) {
-                            Wmsg = "" + buffer[0];
-                            Smsg = "" + buffer[1];
-                            Log.d("ReadMessage", "" + Smsg + Wmsg);
+                            msg.arg1 = buffer[0];
+                            msg.arg2 = buffer[1];
                         }
                     } catch (IOException e) {
                     }
-                    handler.sendMessage(handler.obtainMessage());
+                    handler.sendMessage(msg);
                     count = 0;
                 }
             }
@@ -188,8 +189,8 @@ public class BTClient extends Activity {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            ShakeFreq.setText(Smsg);   //显示数据
-            WindFreq.setText(Wmsg);
+            ShakeFreq.setText(msg.arg2+"");   //显示数据
+            WindFreq.setText(msg.arg1+"");
         }
     };
 
@@ -318,12 +319,15 @@ public class BTClient extends Activity {
                 }
                 switch (checkedId) {
                     case R.id.Angle_HorizontalInc:
+                    case R.id.Angle_VerticalInc:
                         cmd = 0x02;
                         break;
                     case R.id.Angle_HorizontalDec:
+                    case R.id.Angle_VerticalDec:
                         cmd = 0x01;
                         break;
                     case R.id.Angle_HorizontalStop:
+                    case R.id.Angle_VerticalStop:
                         cmd = 0x00;
                         break;
                 }
@@ -331,6 +335,7 @@ public class BTClient extends Activity {
                 try {
                     os = _socket.getOutputStream();
                     os.write(buff);
+                    Log.d("Writebuff",""+buff[2]+buff[3]);
                 } catch (IOException e) {
                 }
             }

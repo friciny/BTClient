@@ -3,7 +3,7 @@
               xmlns:tools="http://schemas.android.com/tools" android:orientation="vertical"
               android:layout_width="fill_parent"
               android:layout_height="fill_parent"
-              android:layout_margin="20dp"
+              android:layout_margin="10dp"
               tools:context=".DeviceListActivity">
     <LinearLayout
             android:layout_width="fill_parent"
@@ -14,13 +14,13 @@
                 android:textSize="30sp"
                 android:gravity="center"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"/>
+                android:layout_height="40dp"/>
         <TextView
                 android:text="ZLX—150C智能蔬菜种子重力选种机"
                 android:textSize="20sp"
                 android:gravity="center_horizontal"
                 android:layout_width="fill_parent"
-                android:layout_height="40dp"/>
+                android:layout_height="30dp"/>
     </LinearLayout>
 
     <LinearLayout
@@ -83,7 +83,7 @@
             android:id="@+id/tabHost">
         <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical">
             <TabWidget
                     android:id="@android:id/tabs"
@@ -93,11 +93,11 @@
             <FrameLayout
                     android:id="@android:id/tabcontent"
                     android:layout_width="match_parent"
-                    android:layout_height="70dp">
+                    android:layout_height="wrap_content">
                 <LinearLayout
                         android:id="@+id/TabLayout_Wind"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:paddingTop="10dp">
                     <Button
@@ -123,7 +123,7 @@
                 <LinearLayout
                         android:id="@+id/TabLayout_Shake"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:paddingTop="10dp">
                     <Button
@@ -146,17 +146,37 @@
                             android:onClick="onFreqClicked"/>
 
                 </LinearLayout>
+            </FrameLayout>
+        </LinearLayout>
+    </TabHost>
+    <TabHost
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tabHost2">
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+            <TabWidget
+                    android:id="@android:id/tabs"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+            </TabWidget>
+            <FrameLayout
+                    android:id="@android:id/tabcontent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
                 <LinearLayout
                         android:id="@+id/TabLayout_AngleHorizontal"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:paddingTop="10dp">
                     <RadioGroup
                             android:orientation="horizontal"
                             android:id="@+id/AngleHorizontalRadio"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent">
+                            android:layout_height="wrap_content">
                         <RadioButton
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
@@ -189,12 +209,11 @@
                                 android:text="减"
                                 android:id="@+id/Angle_HorizontalDec"/>
                     </RadioGroup>
-
                 </LinearLayout>
                 <LinearLayout
                         android:id="@+id/TabLayout_AngleVertical"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:paddingTop="10dp">
                     <RadioGroup
@@ -265,7 +284,7 @@
                 android:textSize="28sp"
                 android:id="@+id/Quit_Button"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="fill_parent"
                 android:layout_weight="1"
                 android:background="@drawable/custombutton"
                 android:onClick="onQuitButtonClicked">
