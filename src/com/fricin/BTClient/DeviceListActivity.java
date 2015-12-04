@@ -35,6 +35,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 
+import java.util.Set;
+
 
 public class DeviceListActivity extends Activity {
     // 调试用
@@ -70,11 +72,11 @@ public class DeviceListActivity extends Activity {
         });
 
         // 初使化设备存储数组
-        mPairedDevicesArrayAdapter = new ArrayAdapter<String>(this, R.layout.device_name);
-        mNewDevicesArrayAdapter = new ArrayAdapter<String>(this, R.layout.device_name);
+        mPairedDevicesArrayAdapter = new ArrayAdapter<>(this, R.layout.device_name);
+        mNewDevicesArrayAdapter = new ArrayAdapter<>(this, R.layout.device_name);
 
         // 设置已配队设备列表
-        
+
         ListView pairedListView = (ListView) findViewById(R.id.paired_devices);
         pairedListView.setAdapter(mPairedDevicesArrayAdapter);
         pairedListView.setOnItemClickListener(mDeviceClickListener);
@@ -96,14 +98,14 @@ public class DeviceListActivity extends Activity {
         mBtAdapter = BluetoothAdapter.getDefaultAdapter();
 
         // 得到已配对蓝牙设备列表
-        //Set<BluetoothDevice> pairedDevices = mBtAdapter.getBondedDevices();
+        Set<BluetoothDevice> pairedDevices = mBtAdapter.getBondedDevices();
 
         // 添加已配对设备到列表并显示 
-       // if (pairedDevices.size() > 0) {
-           // findViewById(R.id.title_paired_devices).setVisibility(View.VISIBLE);
-        //    for (BluetoothDevice device : pairedDevices) {
-       //         mPairedDevicesArrayAdapter.add(device.getName() + "\n" + device.getAddress());
-       //     }
+        if (pairedDevices.size() > 0) {
+            for (BluetoothDevice device : pairedDevices) {
+                mPairedDevicesArrayAdapter.add(device.getName() + "\n" + device.getAddress());
+            }
+        }
        // } else {
        //     String noDevices = "No devices have been paired";
        //     mPairedDevicesArrayAdapter.add(noDevices);
@@ -180,8 +182,6 @@ public class DeviceListActivity extends Activity {
                 // 如果是已配对的则略过，已得到显示，其余的在添加到列表中进行显示
                 if (device.getBondState() != BluetoothDevice.BOND_BONDED) {
                     mNewDevicesArrayAdapter.add(device.getName() + "\n" + device.getAddress());
-                }else{  //添加到已配对设备列表
-                	mPairedDevicesArrayAdapter.add(device.getName() + "\n" + device.getAddress());
                 }
             // 搜索完成action
             } else if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)) {
@@ -196,6 +196,5 @@ public class DeviceListActivity extends Activity {
             }
         }
     };
-
 
 }
