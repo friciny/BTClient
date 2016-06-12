@@ -6,8 +6,9 @@ import java.io.OutputStream;
 import java.util.UUID;
 
 import android.util.Log;
+import android.view.Gravity;
 import android.widget.*;
-import com.test.BTClient.DeviceListActivity;
+import com.fricin.BTClient.DeviceListActivity;
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -21,7 +22,7 @@ import android.widget.RadioGroup.*;
 //import android.view.MenuInflater;
 //import android.view.MenuItem;
 import android.view.View;
-import com.test.BTClient.R;
+import com.fricin.BTClient.R;
 
 public class BTClient extends Activity {
 
@@ -30,11 +31,17 @@ public class BTClient extends Activity {
     private final static String MY_UUID = "00001101-0000-1000-8000-00805F9B34FB";   //SPP服务UUID号
 
     private InputStream is;    //输入流，用来接收蓝牙数据
+<<<<<<< HEAD
+    static private TextView ShakeFreq;
+    static private TextView WindFreq;
+
+=======
     private OutputStream os;
     private TextView ShakeFreq;
     private TextView WindFreq;
     private RadioGroup AngleHradioGroup;
     private RadioGroup AngleVradioGroup;
+>>>>>>> master
 
 
     //public String filename=""; //用来保存存储的文件名
@@ -53,6 +60,9 @@ public class BTClient extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         TabHost tabHost;
+        RadioGroup AngleHradioGroup;
+        RadioGroup AngleVradioGroup;
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);   //设置画面为主画面 main.xml
 
@@ -66,10 +76,13 @@ public class BTClient extends Activity {
         tabHost.setup();
         tabHost.addTab(tabHost.newTabSpec("Wind").setIndicator("风机频率").setContent(R.id.TabLayout_Wind));
         tabHost.addTab(tabHost.newTabSpec("Shake").setIndicator("筛床频率").setContent(R.id.TabLayout_Shake));
+        tabHost = (TabHost) findViewById(R.id.tabHost2);
+        tabHost.setup();
         tabHost.addTab(tabHost.newTabSpec("Angle_H").setIndicator("横向倾角").setContent(R.id.TabLayout_AngleHorizontal));
         tabHost.addTab(tabHost.newTabSpec("Angle_V").setIndicator("纵向倾角").setContent(R.id.TabLayout_AngleVertical));
-        Log.d("gg",tabHost.getTabWidget()+"");
-        //ShakeFreqInc =  (Button)findViewById(R.id.ShakeFreqInc);
+
+        Intent intent = new Intent(bluetooth.ACTION_REQUEST_ENABLE);
+        startActivity(intent);
 
         //如果打开本地蓝牙设备不成功，提示信息，结束程序
         /*if (_bluetooth == null){
@@ -80,13 +93,13 @@ public class BTClient extends Activity {
         */
 
         // 设置设备可以被搜索
-        new Thread() {
-            public void run() {
-                if (!bluetooth.isEnabled()) {
-                    bluetooth.enable();
-                }
-            }
-        }.start();
+//        new Thread() {
+//            public void run() {
+//                if (!bluetooth.isEnabled()) {
+//                    bluetooth.enable();
+//                }
+//            }
+//        }.start();
     }
 
     //接收活动结果，响应startActivityForResult()
@@ -114,12 +127,13 @@ public class BTClient extends Activity {
                         Toast.makeText(this, "连接" + _device.getName() + "成功！", Toast.LENGTH_SHORT).show();
                         btn.setText("断开");
                     } catch (IOException e) {
+                        Log.d("BluetoothConnectFail",e.getMessage());
                         try {
-                            Toast.makeText(this, "连接失败！", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(this, "连接失败！请重新连接", Toast.LENGTH_SHORT).show();
                             _socket.close();
                             _socket = null;
                         } catch (IOException ee) {
-                            Toast.makeText(this, "连接失败！", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(this, "连接失败！请重新连接", Toast.LENGTH_SHORT).show();
                         }
 
                         return;
@@ -163,7 +177,11 @@ public class BTClient extends Activity {
                         }
                     }
                     int size;
+<<<<<<< HEAD
+                    Message msg = handler.obtainMessage();
+=======
                     Message msg = Message.obtain();
+>>>>>>> master
                     try {
                         byte[] buffer = new byte[count];
                         if (is == null) return;
@@ -182,12 +200,17 @@ public class BTClient extends Activity {
     }
 
     //消息处理队列
-    Handler handler = new Handler() {
+    static Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
+<<<<<<< HEAD
+            ShakeFreq.setText(msg.arg2 + "");   //显示数据
+            WindFreq.setText(msg.arg1 + "");
+=======
             ShakeFreq.setText(msg.arg2+"");   //显示数据
             WindFreq.setText(msg.arg1+"");
+>>>>>>> master
         }
     };
 
@@ -238,63 +261,71 @@ public class BTClient extends Activity {
 
     //连接按键响应函数
     public void onConnectButtonClicked(View v) {
-        if (bluetooth.isEnabled() == false) {  //如果蓝牙服务不可用则提示
-            Toast.makeText(this, " 打开蓝牙中...", Toast.LENGTH_LONG).show();
-            return;
-        }
-
-
-        //如未连接设备则打开DeviceListActivity进行设备搜索
-        Button btn = (Button) findViewById(R.id.Connect_Button);
-        if (_socket == null) {
-            Intent serverIntent = new Intent(this, DeviceListActivity.class); //跳转程序设置
-            startActivityForResult(serverIntent, REQUEST_CONNECT_DEVICE);  //设置返回宏定义
+        if (!bluetooth.isEnabled()) {
+            //如果蓝牙未开启则请求开启
+            Intent intent = new Intent(bluetooth.ACTION_REQUEST_ENABLE);
+            startActivity(intent);
         } else {
-            //关闭连接socket
-            try {
-                is.close();
-                _socket.close();
-                _socket = null;
-                bRun = false;
-                btn.setText("连接");
-            } catch (IOException e) {
+
+            //如未连接设备则打开DeviceListActivity进行设备搜索
+            Button btn = (Button) findViewById(R.id.Connect_Button);
+            if (_socket == null) {
+                Intent serverIntent = new Intent(this, DeviceListActivity.class); //跳转程序设置
+                startActivityForResult(serverIntent, REQUEST_CONNECT_DEVICE);  //设置返回宏定义
+            } else {
+                //关闭连接socket
+                try {
+                    is.close();
+                    _socket.close();
+                    _socket = null;
+                    bRun = false;
+                    btn.setText("连接");
+                } catch (IOException e) {
+                }
             }
         }
-        return;
     }
 
     public void onFreqClicked(View v) throws IOException {
         if (_socket != null) {
             OutputStream os = _socket.getOutputStream();
-            int sendfreq = 0;
+            int sendFreq;
             byte id = 0x00;
-            switch (((Button) v).getId()) {
+            switch (v.getId()) {
                 case R.id.WindFreqInc:
-                    sendfreq = Integer.parseInt(WindFreq.getText().toString());
-                    sendfreq++;
+                    sendFreq = Integer.parseInt(WindFreq.getText().toString());
+                    sendFreq++;
                     id = 0x02;
                     break;
                 case R.id.WindFreqDec:
-                    sendfreq = Integer.parseInt(WindFreq.getText().toString());
-                    sendfreq--;
+                    sendFreq = Integer.parseInt(WindFreq.getText().toString());
+                    if (sendFreq>0) {
+                        sendFreq--;
+                    }
                     id = 0x02;
                     break;
                 case R.id.ShakeFreqInc:
-                    sendfreq = Integer.parseInt(ShakeFreq.getText().toString());
-                    sendfreq++;
+                    sendFreq = Integer.parseInt(ShakeFreq.getText().toString());
+                    sendFreq++;
                     id = 0x03;
                     break;
                 case R.id.ShakeFreqDec:
-                    sendfreq = Integer.parseInt(ShakeFreq.getText().toString());
-                    sendfreq--;
+                    sendFreq = Integer.parseInt(ShakeFreq.getText().toString());
+                    if (sendFreq>0) {
+                        sendFreq--;
+                    }
                     id = 0x03;
                     break;
                 default:
-                    sendfreq = 0;
+                    sendFreq = 0;
                     break;
             }
-            byte[] buff = {0x05, 0x04, id, Byte.valueOf(sendfreq + "")};
+            byte[] buff = {0x05, 0x04, id, Byte.valueOf(sendFreq + "")};
             os.write(buff);
+        } else {
+            Toast toast = Toast.makeText(getApplicationContext(), "请点击连接键连接选种机", Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.show();
         }
     }
 
@@ -330,12 +361,18 @@ public class BTClient extends Activity {
                 }
                 byte[] buff = {0x05, 0x04, id, cmd};
                 try {
-                    os = _socket.getOutputStream();
+                    OutputStream os = _socket.getOutputStream();
                     os.write(buff);
+                    Log.d("WriteBuffData is", "" + buff[2] + buff[3]);
                 } catch (IOException e) {
                 }
+            } else {
+                Toast toast = Toast.makeText(getApplicationContext(), "请点击连接键连接选种机", Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.CENTER, 0, 0);
+                toast.show();
             }
         }
+
 
     }
 
