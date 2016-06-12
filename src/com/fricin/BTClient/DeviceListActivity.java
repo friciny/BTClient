@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.test.BTClient;
+package com.fricin.BTClient;
 
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;

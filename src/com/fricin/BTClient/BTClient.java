@@ -8,7 +8,7 @@ import java.util.UUID;
 import android.util.Log;
 import android.view.Gravity;
 import android.widget.*;
-import com.test.BTClient.DeviceListActivity;
+import com.fricin.BTClient.DeviceListActivity;
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -22,7 +22,7 @@ import android.widget.RadioGroup.*;
 //import android.view.MenuInflater;
 //import android.view.MenuItem;
 import android.view.View;
-import com.test.BTClient.R;
+import com.fricin.BTClient.R;
 
 public class BTClient extends Activity {
 
