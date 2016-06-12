@@ -31,9 +31,17 @@ public class BTClient extends Activity {
     private final static String MY_UUID = "00001101-0000-1000-8000-00805F9B34FB";   //SPP服务UUID号
 
     private InputStream is;    //输入流，用来接收蓝牙数据
+<<<<<<< HEAD
     static private TextView ShakeFreq;
     static private TextView WindFreq;
 
+=======
+    private OutputStream os;
+    private TextView ShakeFreq;
+    private TextView WindFreq;
+    private RadioGroup AngleHradioGroup;
+    private RadioGroup AngleVradioGroup;
+>>>>>>> master
 
 
     //public String filename=""; //用来保存存储的文件名
@@ -169,7 +177,11 @@ public class BTClient extends Activity {
                         }
                     }
                     int size;
+<<<<<<< HEAD
                     Message msg = handler.obtainMessage();
+=======
+                    Message msg = Message.obtain();
+>>>>>>> master
                     try {
                         byte[] buffer = new byte[count];
                         if (is == null) return;
@@ -192,8 +204,13 @@ public class BTClient extends Activity {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
+<<<<<<< HEAD
             ShakeFreq.setText(msg.arg2 + "");   //显示数据
             WindFreq.setText(msg.arg1 + "");
+=======
+            ShakeFreq.setText(msg.arg2+"");   //显示数据
+            WindFreq.setText(msg.arg1+"");
+>>>>>>> master
         }
     };
 
